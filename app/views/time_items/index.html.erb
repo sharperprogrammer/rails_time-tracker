@@ -1,0 +1,21 @@
+<style>
+  table, th, td {
+    border: 1px solid black;
+  }
+</style>
+
+<h1>Listing Recorded Times</h1>
+
+<table>
+  <tr>
+    <th>Start Time</th>
+    <th>End Time</th>
+  </tr>
+    <% @alltimes.each do |time| %>
+      <tr>
+        <td><%= time.start.getlocal.strftime("%F %T") %></td>
+        <td><%= time.end.getlocal.strftime("%F %T") %></td>
+      </tr>
+    <% end %>
+
+</table>

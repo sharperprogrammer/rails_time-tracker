@@ -1,0 +1,3 @@
+class TimeItem < ApplicationRecord
+  
+end
