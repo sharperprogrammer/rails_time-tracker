@@ -7,7 +7,7 @@ class TimeItemsController < ApplicationController
 
   def new
     @currenttime = TimeItem.new
-    if session[:currenttime] != nil
+    if session[:currenttime_start] != nil
       @currenttime.start = session[:currenttime_start]
     end
   end
