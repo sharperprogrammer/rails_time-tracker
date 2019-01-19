@@ -1,8 +1,37 @@
-<h1>Page for recording new TimeItems</h1>
+<style>
+  /* Only apply these styles to forms with class "float-left" */
+  form.float-left {
+    float: left;
+  }
+</style>
 
-<%= button_to "Start", action: "start" %>
+<h1>Record New Time</h1>
+
+<%= button_to "Start", {action: "start"}, {form_class: "float-left"} %>
 <%= button_to "Stop", action: "stop" %>
 
+<div style="clear:both;"></div>
+
+<br />
+
+Started at: <% if @currenttime.start != nil %>
+<%= @currenttime.start.getlocal.strftime("%F %T") %>
+<% end %>
 <br /><br />
 
-Started at: <%= @currenttime.start %><br /><br />
+Current time: <span id="currenttime"><%= DateTime.now.getlocal.strftime("%F %T") %></span>
+<br />
+
+<script>
+
+  setInterval(getCurrentTime, 1000);
+
+  function getCurrentTime() {
+    $.ajax({url: "/radaradaradarada",
+      success: function(data) {
+        $( "#currenttime" ).html(data);
+      }
+    });
+
+  }
+</script>

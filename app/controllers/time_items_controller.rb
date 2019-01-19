@@ -1,5 +1,5 @@
 class TimeItemsController < ApplicationController
-# require 'date'
+  helper_method :get_current_time
 
   def index
     @alltimes = TimeItem.all
@@ -31,7 +31,11 @@ class TimeItemsController < ApplicationController
     else
       flash[:error] = "You must start the timer before you can stop!"
     end
-    redirect_to new_time_item_path
+    redirect_to time_items_path
+  end
+
+  def get_current_time
+    render plain: DateTime.now.getlocal.strftime("%F %T")
   end
 
 end
