@@ -10,11 +10,15 @@
   <tr>
     <th>Start Time</th>
     <th>End Time</th>
+    <th>Time Elapsed</th>
   </tr>
     <% @alltimes.each do |time| %>
       <tr>
         <td><%= time.start.getlocal.strftime("%F %T") %></td>
         <td><%= time.end.getlocal.strftime("%F %T") %></td>
+        <td style="text-align:center">
+          <%= ((time.end - time.start) / 60).round %> minutes
+        </td>
       </tr>
     <% end %>
 
