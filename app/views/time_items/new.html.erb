@@ -7,29 +7,51 @@
 
 <h1>Record New Time</h1>
 
-<%= button_to "Start", {action: "start"}, {form_class: "float-left"} %>
-<%= button_to "Stop", action: "stop" %>
+<div id="flash-messages"></div>
+
+<button id="start">New Start</button>
+<button id="stop">New Stop</button>
 
 <div style="clear:both;"></div>
 
 <br />
 
-Started at: <% if @currenttime.start != nil %>
+Started at: <span id="start-time"><% if @currenttime.start != nil %>
 <%= @currenttime.start.getlocal.strftime("%F %T") %>
-<% end %>
+<% end %></span>
 <br /><br />
 
-Current time: <span id="currenttime"><%= DateTime.now.getlocal.strftime("%F %T") %></span>
+Current time: <span id="current-time"><%= DateTime.now.getlocal.strftime("%F %T") %></span>
 <br />
 
 <script>
 
   setInterval(getCurrentTime, 1000);
 
+  $(" #start ").click(function() {
+    $.ajax({url: "/radarada",
+      success: function(data) {
+        $(" #start-time ").html(data);
+      }
+    });
+  });
+
+  $(" #stop ").click(function() {
+    $.ajax({url: "/radaradarada",
+      success: function(data) {
+        // This is a band-aid used to display any Flash messages that might
+        // have been created during the Ruby/Rails code in the 'stop' action.
+        // Need to figure out how to display flash messages and replace
+        // this code later.
+        location.reload();
+      }
+    });
+  });
+
   function getCurrentTime() {
     $.ajax({url: "/radaradaradarada",
       success: function(data) {
-        $( "#currenttime" ).html(data);
+        $( "#current-time" ).html(data);
       }
     });
 

@@ -16,7 +16,7 @@ class TimeItemsController < ApplicationController
     @currenttime = TimeItem.new
     @currenttime.start = DateTime.now
     session[:currenttime_start] = @currenttime.start
-    redirect_to new_time_item_path
+    render plain: session[:currenttime_start].getlocal.strftime("%F %T")
   end
 
   def stop
@@ -31,7 +31,6 @@ class TimeItemsController < ApplicationController
     else
       flash[:error] = "You must start the timer before you can stop!"
     end
-    redirect_to time_items_path
   end
 
   def get_current_time
