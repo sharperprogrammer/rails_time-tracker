@@ -1,28 +1,29 @@
-<style>
-  /* Only apply these styles to forms with class "float-left" */
-  form.float-left {
-    float: left;
-  }
-</style>
 
-<h1>Record New Time</h1>
 
-<div id="flash-messages"></div>
+<div class="row">
+  <div class="offset-sm-4 col-sm-4">
+    <div class="card bg-light mb-3">
+      <div class="card-header"><h1 align="center">Record New Time</h1></div>
+        <div class="card-body">
+          <button id="start">New Start</button>
+          <button id="stop">New Stop</button>
 
-<button id="start">New Start</button>
-<button id="stop">New Stop</button>
+          <div style="clear:both;"></div>
 
-<div style="clear:both;"></div>
+          <br />
 
-<br />
+          Started at: <span id="start-time"><% if @currenttime.start != nil %>
+          <%= @currenttime.start.getlocal.strftime("%F %T") %>
+          <% end %></span>
+          <br /><br />
 
-Started at: <span id="start-time"><% if @currenttime.start != nil %>
-<%= @currenttime.start.getlocal.strftime("%F %T") %>
-<% end %></span>
-<br /><br />
-
-Current time: <span id="current-time"><%= DateTime.now.getlocal.strftime("%F %T") %></span>
-<br />
+          Current time: <span id="current-time"><%= DateTime.now.getlocal.strftime("%F %T") %></span>
+          <br />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 
